@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa Funded Awards — Celebrate Your Funded Trading Success</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0d;
+    --bg-elev:#131519;
+    --bg-elev-2:#191c21;
+    --gold:#d4af37;
+    --gold-bright:#f2d477;
+    --gold-deep:#8a6f24;
+    --ivory:#f6f2e9;
+    --muted:#9aa0a8;
+    --line:rgba(212,175,55,0.18);
+    --line-soft:rgba(255,255,255,0.06);
+    --shadow:rgba(0,0,0,0.55);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ivory);
+    font-family:'Montserrat',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;
+    background:var(--gold);
+    display:inline-block;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:15px 30px;
+    font-family:'Montserrat',sans-serif;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border-radius:999px;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+  }
+  .btn:focus-visible{outline:2px solid var(--gold-bright); outline-offset:3px;}
+  .btn-primary{
+    background:linear-gradient(135deg,var(--gold-bright),var(--gold) 55%,var(--gold-deep));
+    color:#151107;
+    box-shadow:0 8px 30px -8px rgba(212,175,55,0.55);
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 34px -10px rgba(212,175,55,0.7);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--ivory);
+    border:1px solid rgba(255,255,255,0.2);
+  }
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold-bright); transform:translateY(-2px);}
+
+  /* LANG SWITCH */
+  .lang-switch{
+    display:flex;align-items:center;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:3px;
+    gap:2px;
+    background:var(--bg-elev);
+  }
+  .lang-btn{
+    border:none;background:none;cursor:pointer;
+    padding:6px 12px;border-radius:999px;
+    font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.06em;
+    color:var(--muted);
+    transition:background .2s, color .2s;
+  }
+  .lang-btn.active{background:var(--gold);color:#151107;}
+  .lang-btn:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px;}
+
+  /* NAV */
+  header.site{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(10,11,13,0.72);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 24px;
+    max-width:1180px;margin:0 auto;
+    gap:20px;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:21px;font-weight:600;letter-spacing:0.03em;
+    white-space:nowrap;
+  }
+  .brand .mark{
+    width:30px;height:30px;border-radius:50%;
+    border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold); font-size:14px;
+  }
+  .nav-links{display:flex;gap:36px;font-size:13px;letter-spacing:0.04em;}
+  .nav-links a{color:var(--muted);transition:color .2s;}
+  .nav-links a:hover{color:var(--gold-bright);}
+  .nav-right{display:flex;align-items:center;gap:18px;}
+  .nav-cta{display:none;}
+  @media(min-width:900px){.nav-cta{display:inline-flex;}}
+  @media(max-width:899px){.nav-links{display:none;}}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:168px 0 110px;
+    background:
+      radial-gradient(ellipse 900px 500px at 78% -10%, rgba(212,175,55,0.16), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 0% 30%, rgba(212,175,55,0.06), transparent 60%),
+      var(--bg);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1fr;gap:64px;align-items:center;
+  }
+  @media(min-width:980px){.hero-grid{grid-template-columns:1.05fr 0.95fr;}}
+  .hero h1{
+    font-size:clamp(38px,5.6vw,64px);
+    line-height:1.05;
+    margin:22px 0 20px;
+    color:var(--ivory);
+  }
+  .hero h1 em{
+    font-style:italic;color:var(--gold-bright);
+  }
+  .hero p.lead{
+    font-size:17px;line-height:1.75;color:var(--muted);
+    max-width:520px;margin-bottom:36px;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+
+  /* ENGRAVING PLAQUE — signature element */
+  .plaque-stage{
+    position:relative;
+    padding:36px;
+    border-radius:var(--radius);
+    background:linear-gradient(180deg,var(--bg-elev),var(--bg-elev-2));
+    border:1px solid var(--line);
+    box-shadow:0 40px 80px -30px var(--shadow);
+  }
+  .plaque-stage .stage-label{
+    font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;display:block;
+  }
+  .plaque{
+    position:relative;
+    border-radius:14px;
+    padding:38px 30px 32px;
+    background:
+      linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01) 40%),
+      linear-gradient(135deg,#1c2027,#0f1114 70%);
+    border:1px solid rgba(212,175,55,0.35);
+    overflow:hidden;
+  }
+  .plaque::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(115deg, transparent 30%, rgba(212,175,55,0.16) 48%, transparent 66%);
+    background-size:250% 250%;
+    background-position:0% 0%;
+    animation:shine 5.5s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes shine{
+    0%,20%{background-position:120% 0%;}
+    55%,100%{background-position:-20% 0%;}
+  }
+  .plaque-inner{position:relative;z-index:1;text-align:center;}
+  .plaque-crest{
+    width:46px;height:46px;margin:0 auto 14px;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold-bright);
+  }
+  .plaque-title{
+    font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:16px;
+  }
+  #pName{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(24px,3.4vw,32px);
+    color:var(--ivory);
+    min-height:1.3em;
+    border-bottom:1px solid rgba(212,175,55,0.4);
+    display:inline-block;
+    padding-bottom:6px;
+    margin-bottom:14px;
+    letter-spacing:0.02em;
+  }
+  .plaque-sub{
+    font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);
+    display:flex;justify-content:center;gap:22px;flex-wrap:wrap;
+  }
+  .plaque-sub span b{color:var(--gold-bright);font-weight:600;}
+  .plaque-foot{
+    margin-top:18px;font-size:10.5px;letter-spacing:0.2em;color:rgba(246,242,233,0.35);text-transform:uppercase;
+  }
+  .engrave-form{
+    margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  }
+  .engrave-form .full{grid-column:1/-1;}
+  .engrave-form input{
+    width:100%;
+    background:var(--bg);
+    border:1px solid rgba(255,255,255,0.12);
+    color:var(--ivory);
+    padding:11px 14px;
+    border-radius:9px;
+    font-family:'Montserrat',sans-serif;
+    font-size:13px;
+  }
+  .engrave-form input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,0.15);}
+  .engrave-form input::placeholder{color:rgba(246,242,233,0.35);}
+
+  section{padding:100px 0;}
+  .section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+  .section-head h2{font-size:clamp(28px,3.6vw,42px);margin-top:16px;color:var(--ivory);}
+  .section-head p{color:var(--muted);margin-top:14px;font-size:15px;line-height:1.7;}
+  .center{text-align:center;}
+
+  /* WHY CHOOSE */
+  .why{background:var(--bg-elev);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;}
+  .why-card{background:var(--bg-elev);padding:36px 28px;position:relative;transition:background .25s;}
+  .why-card:hover{background:var(--bg-elev-2);}
+  .why-card .icon{
+    width:44px;height:44px;border-radius:10px;
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold-bright);font-size:19px;margin-bottom:20px;
+  }
+  .why-card h3{font-size:19px;color:var(--ivory);margin-bottom:8px;font-weight:600;}
+  .why-card p{color:var(--muted);font-size:13.5px;line-height:1.6;margin:0;}
+
+  /* AWARDS */
+  .awards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;}
+  .award-card{
+    background:var(--bg-elev);
+    border:1px solid var(--line-soft);
+    border-radius:var(--radius);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:border-color .25s, transform .25s;
+  }
+  .award-card:hover{border-color:var(--line); transform:translateY(-4px);}
+  .award-card.featured{border-color:var(--gold-deep);}
+  .award-visual{
+    height:200px;position:relative;
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 30%, rgba(212,175,55,0.14), transparent 70%), var(--bg-elev-2);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .award-body{padding:28px;display:flex;flex-direction:column;gap:14px;flex:1;}
+  .award-body h3{font-size:21px;color:var(--ivory);font-weight:600;}
+  .award-body p.desc{color:var(--muted);font-size:13.5px;line-height:1.6;margin:0;}
+  .award-feats{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .award-feats li{font-size:13px;color:var(--ivory);display:flex;align-items:center;gap:9px;}
+  .award-feats li .tick{color:var(--gold);font-weight:700;}
+  .award-price{
+    margin-top:auto;padding-top:16px;border-top:1px dashed var(--line);
+    display:flex;align-items:baseline;justify-content:space-between;
+  }
+  .award-price .from{font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+  .award-price .amount{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold-bright);font-weight:600;}
+
+  .shape{width:88px;height:120px;position:relative;}
+  .shape.glass{
+    background:linear-gradient(160deg, rgba(255,255,255,0.28), rgba(255,255,255,0.02) 60%);
+    border:1px solid rgba(255,255,255,0.35);
+    border-radius:14px 14px 30px 30px / 14px 14px 50px 50px;
+  }
+  .shape.crystal{
+    background:linear-gradient(150deg, rgba(212,175,55,0.5), rgba(212,175,55,0.05) 65%);
+    clip-path:polygon(50% 0%, 100% 30%, 82% 100%, 18% 100%, 0% 30%);
+    border:1px solid rgba(212,175,55,0.55);
+  }
+  .shape.acrylic{
+    background:linear-gradient(160deg, rgba(255,255,255,0.16), rgba(212,175,55,0.18));
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:6px;
+  }
+
+  /* PROP FIRMS */
+  .firms{background:var(--bg-elev);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+  .firms-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+    background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;
+  }
+  .firm-tile{
+    background:var(--bg-elev);
+    padding:30px 16px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:0.02em;
+    color:rgba(246,242,233,0.42);
+    text-align:center;
+  }
+  .firms-note{margin-top:26px;text-align:center;color:var(--muted);font-size:12.5px;letter-spacing:0.04em;}
+  .firms-note .soon{color:var(--gold);font-weight:600;}
+
+  /* HOW IT WORKS */
+  .steps{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px;
+    position:relative;
+  }
+  .step{position:relative;padding-top:8px;}
+  .step .num{
+    font-family:'Cormorant Garamond',serif;
+    font-size:44px;color:var(--gold);
+    line-height:1;margin-bottom:14px;
+    opacity:0.85;
+  }
+  .step h3{font-size:18px;color:var(--ivory);margin-bottom:8px;font-weight:600;}
+  .step p{color:var(--muted);font-size:13.5px;line-height:1.6;margin:0;}
+
+  /* FAQ */
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;}
+  .faq-item{background:var(--bg-elev);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;color:var(--ivory);
+    padding:22px 26px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:600;
+    display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:16px;
+  }
+  .faq-q:focus-visible{outline:2px solid var(--gold-bright);outline-offset:-2px;}
+  .faq-q .plus{color:var(--gold);font-size:20px;transition:transform .3s;flex-shrink:0;}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;
+    color:var(--muted);font-size:13.5px;line-height:1.7;padding:0 26px;
+  }
+  .faq-item.open .faq-a{max-height:200px;padding:0 26px 22px;}
+
+  /* REVIEWS */
+  .reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;}
+  .review-card{
+    background:var(--bg-elev);border:1px solid var(--line-soft);border-radius:var(--radius);
+    padding:28px;
+  }
+  .stars{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:14px;}
+  .review-card p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:var(--ivory);line-height:1.5;margin:0 0 14px;}
+  .review-card .who{font-size:12px;color:var(--muted);letter-spacing:0.04em;}
+
+  /* FOOTER */
+  .site-footer{
+    background:var(--bg-elev);border-top:1px solid var(--line-soft);
+    padding:70px 0 32px;
+  }
+  .footer-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:40px;margin-bottom:50px;}
+  .footer-brand h3{font-size:24px;color:var(--ivory);}
+  .footer-brand p{color:var(--muted);font-size:13.5px;margin-top:10px;max-width:280px;line-height:1.6;}
+  .socials{display:flex;gap:14px;}
+  .socials a{
+    width:40px;height:40px;border-radius:50%;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:13px;
+    transition:background .2s, color .2s;
+  }
+  .socials a:hover{background:var(--gold);color:#151107;}
+  .footer-bottom{
+    border-top:1px solid var(--line-soft);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    color:rgba(246,242,233,0.35);font-size:12px;
+  }
+  .final-cta{text-align:center;padding:100px 0;background:
+      radial-gradient(ellipse 700px 400px at 50% 0%, rgba(212,175,55,0.14), transparent 65%), var(--bg);
+    border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+  }
+  .final-cta h2{font-size:clamp(28px,4vw,44px);color:var(--ivory);margin-bottom:18px;}
+  .final-cta p{color:var(--muted);max-width:480px;margin:0 auto 34px;line-height:1.7;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <div class="brand"><span class="mark">A</span> Africa Funded Awards</div>
+    <div class="nav-links">
+      <a href="#why" data-i18n="text" data-en="Why Us" data-fr="Pourquoi Nous">Why Us</a>
+      <a href="#awards" data-i18n="text" data-en="Awards" data-fr="Récompenses">Awards</a>
+      <a href="#how" data-i18n="text" data-en="How It Works" data-fr="Comment Ça Marche">How It Works</a>
+      <a href="#faq" data-i18n="text" data-en="FAQ" data-fr="FAQ">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+      </div>
+      <a href="#order" class="btn btn-primary nav-cta" data-i18n="text" data-en="Order My Award" data-fr="Commander Mon Trophée">Order My Award</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow" data-i18n="text" data-en="Africa's Premier Trader Recognition" data-fr="La Référence Africaine de Reconnaissance des Traders">Africa's Premier Trader Recognition</span>
+      <h1 data-i18n="html" data-en="Celebrate Your <em>Funded</em> Trading Success" data-fr="Célébrez Votre Succès de Trading <em>Financé</em>">Celebrate Your <em>Funded</em> Trading Success</h1>
+      <p class="lead" data-i18n="text" data-en="Africa's premier destination for premium custom awards designed exclusively for funded traders. We create elegant, personalized awards that honor your achievement — and deliver them anywhere on the continent." data-fr="La destination africaine de référence pour des trophées personnalisés haut de gamme, conçus exclusivement pour les traders financés. Nous créons des récompenses élégantes qui honorent votre réussite — livrées partout sur le continent.">Africa's premier destination for premium custom awards designed exclusively for funded traders. We create elegant, personalized awards that honor your achievement — and deliver them anywhere on the continent.</p>
+      <div class="hero-actions">
+        <a href="#order" class="btn btn-primary" data-i18n="text" data-en="Order My Award" data-fr="Commander Mon Trophée">Order My Award</a>
+        <a href="#awards" class="btn btn-ghost" data-i18n="text" data-en="View Awards" data-fr="Voir Les Trophées">View Awards</a>
+      </div>
+    </div>
+
+    <div class="plaque-stage">
+      <span class="stage-label" data-i18n="text" data-en="Live Preview — Engrave It Yourself" data-fr="Aperçu En Direct — Personnalisez-le">Live Preview — Engrave It Yourself</span>
+      <div class="plaque">
+        <div class="plaque-inner">
+          <div class="plaque-crest">★</div>
+          <div class="plaque-title" data-i18n="text" data-en="Certificate of Funded Achievement" data-fr="Certificat de Réussite Financée">Certificate of Funded Achievement</div>
+          <div id="pName">Amadou</div>
+          <div class="plaque-sub">
+            <span id="pFirm">Get Leveraged</span>
+            <span>&middot;</span>
+            <span><span data-i18n="text" data-en="Funded" data-fr="Financé">Funded</span> <b id="pAmount">$100,000</b></span>
+          </div>
+          <div class="plaque-foot">Africa Funded Awards</div>
+        </div>
+      </div>
+      <div class="engrave-form">
+        <input id="inName" class="full" type="text" data-i18n="placeholder" data-en="Your name" data-fr="Votre nom" placeholder="Your name" maxlength="24">
+        <input id="inFirm" type="text" data-i18n="placeholder" data-en="Prop firm" data-fr="Société de financement" placeholder="Prop firm" maxlength="20">
+        <input id="inAmount" type="text" data-i18n="placeholder" data-en="Funded amount" data-fr="Montant financé" placeholder="Funded amount" maxlength="12">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="text" data-en="The Standard" data-fr="L'Excellence">The Standard</span>
+      <h2 data-i18n="text" data-en="Why Choose Africa Funded Awards?" data-fr="Pourquoi Choisir Africa Funded Awards ?">Why Choose Africa Funded Awards?</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="icon">&#127942;</div><h3 data-i18n="text" data-en="Premium Materials" data-fr="Matériaux Premium">Premium Materials</h3><p data-i18n="text" data-en="Crafted with high-quality glass, crystal, and acrylic." data-fr="Fabriqués en verre, cristal et acrylique de haute qualité.">Crafted with high-quality glass, crystal, and acrylic.</p></div>
+      <div class="why-card"><div class="icon">&#128666;</div><h3 data-i18n="text" data-en="Fast Delivery" data-fr="Livraison Rapide">Fast Delivery</h3><p data-i18n="text" data-en="Delivered across Africa within 10–15 business days." data-fr="Livré partout en Afrique sous 10 à 15 jours ouvrés.">Delivered across Africa within 10–15 business days.</p></div>
+      <div class="why-card"><div class="icon">&#127912;</div><h3 data-i18n="text" data-en="Personalized Design" data-fr="Design Personnalisé">Personalized Design</h3><p data-i18n="text" data-en="Your name, prop firm, funded amount, and achievement." data-fr="Votre nom, votre société de financement, le montant financé et votre exploit.">Your name, prop firm, funded amount, and achievement.</p></div>
+      <div class="why-card"><div class="icon">&#127760;</div><h3 data-i18n="text" data-en="Africa-Wide Shipping" data-fr="Livraison Dans Toute l'Afrique">Africa-Wide Shipping</h3><p data-i18n="text" data-en="We deliver to every African country." data-fr="Nous livrons dans tous les pays africains.">We deliver to every African country.</p></div>
+      <div class="why-card"><div class="icon">&#11088;</div><h3 data-i18n="text" data-en="Professional Finish" data-fr="Finition Professionnelle">Professional Finish</h3><p data-i18n="text" data-en="Designed to look worthy of your trading success." data-fr="Conçu pour être à la hauteur de votre réussite en trading.">Designed to look worthy of your trading success.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="awards">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="text" data-en="Featured Awards" data-fr="Trophées Vedettes">Featured Awards</span>
+      <h2 data-i18n="text" data-en="Choose Your Finish" data-fr="Choisissez Votre Finition">Choose Your Finish</h2>
+    </div>
+    <div class="awards-grid">
+
+      <div class="award-card featured">
+        <div class="award-visual"><div class="shape glass"></div></div>
+        <div class="award-body">
+          <h3 data-i18n="text" data-en="Glass Curved Award" data-fr="Trophée en Verre Courbé">Glass Curved Award</h3>
+          <p class="desc" data-i18n="text" data-en="Elegant curved glass with premium engraving." data-fr="Verre courbé élégant avec gravure premium.">Elegant curved glass with premium engraving.</p>
+          <ul class="award-feats">
+            <li><span class="tick">✓</span> <span data-i18n="text" data-en="Custom Name" data-fr="Nom Personnalisé">Custom Name</span></li>
+            <li><span class="tick">✓</span> <span data-i18n="text" data-en="Prop Firm Logo" data-fr="Logo de la Société">Prop Firm Logo</span></li>
+            <li><span class="tick">✓</span> <span data-i18n="text" data-en="Funded Amount" data-fr="Montant Financé">Funded Amount</span></li>
+            <li><span class="tick">✓</span> <span data-i18n="text" data-en="Date" data-fr="Date">Date</span></li>
+          </ul>
+          <div class="award-price"><span class="from" data-i18n="text" data-en="Starting from" data-fr="À partir de">Starting from</span><span class="amount">$49</span></div>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <div class="award-visual"><div class="shape crystal"></div></div>
+        <div class="award-body">
+          <h3 data-i18n="text" data-en="Crystal Award" data-fr="Trophée en Cristal">Crystal Award</h3>
+          <p class="desc" data-i18n="text" data-en="Luxury crystal finish for elite traders." data-fr="Finition cristal de luxe pour traders d'élite.">Luxury crystal finish for elite traders.</p>
+          <ul class="award-feats">
+            <li><span class="tick">✓</span> <span data-i18n="text" data-en="Custom Name" data-fr="Nom Personnalisé">Custom Name</span></li>
+            <li><span class="tick">✓</span> <span data-i18n="text" data-en="Prop Firm Logo" data-fr="Logo de la Société">Prop Firm Logo</span></li>
+            <li><span class="tick">✓</span> <span data-i18n="text" data-en="Funded Amount" data-fr="Montant Financé">Funded Amount</span></li>
+          </ul>
+          <div class="award-price"><span class="from" data-i18n="text" data-en="Starting from" data-fr="À partir de">Starting from</span><span class="amount">$69</span></div>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <div class="award-visual"><div class="shape acrylic"></div></div>
+        <div class="award-body">
+          <h3 data-i18n="text" data-en="Premium Acrylic Award" data-fr="Trophée en Acrylique Premium">Premium Acrylic Award</h3>
+          <p class="desc" data-i18n="text" data-en="Modern design with premium UV printing." data-fr="Design moderne avec impression UV premium.">Modern design with premium UV printing.</p>
+          <ul class="award-feats">
+            <li><span class="tick">✓</span> <span data-i18n="text" data-en="Custom Name" data-fr="Nom Personnalisé">Custom Name</span></li>
+            <li><span class="tick">✓</span> <span data-i18n="text" data-en="Prop Firm Logo" data-fr="Logo de la Société">Prop Firm Logo</span></li>
+            <li><span class="tick">✓</span> <span data-i18n="text" data-en="Funded Amount" data-fr="Montant Financé">Funded Amount</span></li>
+          </ul>
+          <div class="award-price"><span class="from" data-i18n="text" data-en="Starting from" data-fr="À partir de">Starting from</span><span class="amount">$39</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="firms">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="text" data-en="Recognized Everywhere" data-fr="Reconnu Partout">Recognized Everywhere</span>
+      <h2 data-i18n="text" data-en="Trusted Prop Firms" data-fr="Sociétés de Financement Partenaires">Trusted Prop Firms</h2>
+    </div>
+    <div class="firms-grid">
+      <div class="firm-tile">FTMO</div>
+      <div class="firm-tile">FundedNext</div>
+      <div class="firm-tile">Funding Pips</div>
+      <div class="firm-tile">Atlas Funded</div>
+      <div class="firm-tile">Get Leveraged</div>
+      <div class="firm-tile">The5ers</div>
+      <div class="firm-tile">Blueberry Funded</div>
+      <div class="firm-tile">Topstep</div>
+    </div>
+    <p class="firms-note"><span class="soon" data-i18n="text" data-en="Coming soon" data-fr="Bientôt disponible">Coming soon</span> — <span data-i18n="text" data-en="these will include affiliate links." data-fr="incluront des liens d'affiliation.">these will include affiliate links.</span></p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="text" data-en="Simple Process" data-fr="Processus Simple">Simple Process</span>
+      <h2 data-i18n="text" data-en="How It Works" data-fr="Comment Ça Marche">How It Works</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h3 data-i18n="text" data-en="Place Your Order" data-fr="Passez Votre Commande">Place Your Order</h3><p data-i18n="text" data-en="Choose your favorite award." data-fr="Choisissez votre trophée préféré.">Choose your favorite award.</p></div>
+      <div class="step"><div class="num">02</div><h3 data-i18n="text" data-en="Send Your Certificate" data-fr="Envoyez Votre Certificat">Send Your Certificate</h3><p data-i18n="text" data-en="Provide your funded certificate and account details." data-fr="Fournissez votre certificat de financement et les détails de votre compte.">Provide your funded certificate and account details.</p></div>
+      <div class="step"><div class="num">03</div><h3 data-i18n="text" data-en="We Design It" data-fr="Nous Le Concevons">We Design It</h3><p data-i18n="text" data-en="Our designers prepare your personalized award." data-fr="Nos designers préparent votre trophée personnalisé.">Our designers prepare your personalized award.</p></div>
+      <div class="step"><div class="num">04</div><h3 data-i18n="text" data-en="We Ship" data-fr="Nous Expédions">We Ship</h3><p data-i18n="text" data-en="Receive your premium award anywhere in Africa." data-fr="Recevez votre trophée premium partout en Afrique.">Receive your premium award anywhere in Africa.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="text" data-en="Good to Know" data-fr="Bon à Savoir">Good to Know</span>
+      <h2 data-i18n="text" data-en="Frequently Asked Questions" data-fr="Questions Fréquentes">Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="faq-item open">
+        <button class="faq-q"><span data-i18n="text" data-en="Can I customize my award?" data-fr="Puis-je personnaliser mon trophée ?">Can I customize my award?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p data-i18n="text" data-en="Yes. Every award is fully personalized." data-fr="Oui. Chaque trophée est entièrement personnalisé.">Yes. Every award is fully personalized.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span data-i18n="text" data-en="How long does production take?" data-fr="Combien de temps prend la production ?">How long does production take?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p data-i18n="text" data-en="Usually 3–5 business days." data-fr="Généralement 3 à 5 jours ouvrés.">Usually 3–5 business days.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span data-i18n="text" data-en="Delivery time?" data-fr="Délai de livraison ?">Delivery time?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p data-i18n="text" data-en="Around 10–15 business days." data-fr="Environ 10 à 15 jours ouvrés.">Around 10–15 business days.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span data-i18n="text" data-en="Do you ship outside Africa?" data-fr="Livrez-vous en dehors de l'Afrique ?">Do you ship outside Africa?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p data-i18n="text" data-en="Yes." data-fr="Oui.">Yes.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="text" data-en="In Their Words" data-fr="Ils En Parlent">In Their Words</span>
+      <h2 data-i18n="text" data-en="Customer Reviews" data-fr="Avis Clients">Customer Reviews</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="stars">★★★★★</div><p data-i18n="text" data-en="&quot;The quality exceeded my expectations.&quot;" data-fr="&quot;La qualité a dépassé mes attentes.&quot;">"The quality exceeded my expectations."</p><div class="who" data-i18n="text" data-en="Verified Buyer" data-fr="Acheteur Vérifié">Verified Buyer</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p data-i18n="text" data-en="&quot;Exactly like a real FTMO award.&quot;" data-fr="&quot;Exactement comme un vrai trophée FTMO.&quot;">"Exactly like a real FTMO award."</p><div class="who" data-i18n="text" data-en="Verified Buyer" data-fr="Acheteur Vérifié">Verified Buyer</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p data-i18n="text" data-en="&quot;Highly recommended.&quot;" data-fr="&quot;Vivement recommandé.&quot;">"Highly recommended."</p><div class="who" data-i18n="text" data-en="Verified Buyer" data-fr="Acheteur Vérifié">Verified Buyer</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" id="order">
+  <div class="wrap">
+    <span class="eyebrow center" data-i18n="text" data-en="Ready When You Are" data-fr="Prêt Quand Vous L'êtes">Ready When You Are</span>
+    <h2 data-i18n="text" data-en="Your Achievement Deserves a Trophy" data-fr="Votre Réussite Mérite Un Trophée">Your Achievement Deserves a Trophy</h2>
+    <p data-i18n="text" data-en="Join funded traders across Africa who've turned their milestone into something they can hold, display, and be proud of." data-fr="Rejoignez les traders financés à travers l'Afrique qui ont transformé leur étape en quelque chose qu'ils peuvent tenir, exposer et dont ils sont fiers.">Join funded traders across Africa who've turned their milestone into something they can hold, display, and be proud of.</p>
+    <a href="#" class="btn btn-primary" data-i18n="text" data-en="Order My Award" data-fr="Commander Mon Trophée">Order My Award</a>
+  </div>
+</section>
+
+<div class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Africa Funded Awards</h3>
+        <p data-i18n="text" data-en="Celebrating Trading Success Across Africa." data-fr="Célébrer La Réussite En Trading À Travers l'Afrique.">Celebrating Trading Success Across Africa.</p>
+      </div>
+      <div class="socials">
+        <a href="#" aria-label="WhatsApp">W</a>
+        <a href="#" aria-label="Facebook">F</a>
+        <a href="#" aria-label="Instagram">I</a>
+        <a href="#" aria-label="TikTok">T</a>
+        <a href="#" aria-label="Email">@</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="text" data-en="© 2026 Africa Funded Awards. All rights reserved." data-fr="© 2026 Africa Funded Awards. Tous droits réservés.">© 2026 Africa Funded Awards. All rights reserved.</span>
+      <span data-i18n="text" data-en="Made for traders, across Africa." data-fr="Conçu pour les traders, à travers l'Afrique.">Made for traders, across Africa.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click',()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Live engraving preview
+  const inName = document.getElementById('inName');
+  const inFirm = document.getElementById('inFirm');
+  const inAmount = document.getElementById('inAmount');
+  const pName = document.getElementById('pName');
+  const pFirm = document.getElementById('pFirm');
+  const pAmount = document.getElementById('pAmount');
+
+  function formatAmount(v){
+    if(!v) return '$100,000';
+    const digits = v.replace(/[^0-9]/g,'');
+    if(!digits) return v;
+    return '$' + Number(digits).toLocaleString('en-US');
+  }
+
+  inName.addEventListener('input', ()=>{ pName.textContent = inName.value.trim() || 'Amadou'; });
+  inFirm.addEventListener('input', ()=>{ pFirm.textContent = inFirm.value.trim() || 'Get Leveraged'; });
+  inAmount.addEventListener('input', ()=>{ pAmount.textContent = formatAmount(inAmount.value.trim()); });
+
+  // Language switch
+  const i18nEls = document.querySelectorAll('[data-i18n]');
+  function setLang(lang){
+    i18nEls.forEach(el=>{
+      const val = el.getAttribute('data-'+lang);
+      if(val===null) return;
+      const mode = el.getAttribute('data-i18n');
+      if(mode==='html') el.innerHTML = val;
+      else if(mode==='placeholder') el.placeholder = val;
+      else el.textContent = val;
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+    try{ localStorage.setItem('afa-lang', lang); }catch(e){}
+  }
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.addEventListener('click', ()=> setLang(b.dataset.lang));
+  });
+  let savedLang = 'en';
+  try{ savedLang = localStorage.getItem('afa-lang') || 'en'; }catch(e){}
+  setLang(savedLang);
+</script>
+
+</body>
+</html>
