@@ -408,6 +408,54 @@
   }
   .final-cta h2{font-size:clamp(28px,4vw,44px);color:var(--ivory);margin-bottom:18px;}
   .final-cta p{color:var(--muted);max-width:480px;margin:0 auto 34px;line-height:1.7;}
+
+  /* GLASS EFFECTS + WIDGETS */
+  .glass{
+    background:linear-gradient(135deg,rgba(20,18,12,0.62),rgba(10,11,13,0.48));
+    border:1px solid rgba(255,255,255,0.16);
+    border-radius:var(--radius);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    backdrop-filter:blur(18px) saturate(140%);
+    box-shadow:0 20px 50px -20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .glass-stage{
+    position:relative;overflow:hidden;border-radius:calc(var(--radius) + 6px);
+    border:1px solid var(--line);background:var(--bg-elev);
+    aspect-ratio:16/9;
+  }
+  .glass-stage video,.glass-stage .fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .glass-stage .fallback{
+    background:radial-gradient(circle at 25% 30%,rgba(212,175,55,0.35),transparent 45%),
+               radial-gradient(circle at 80% 70%,rgba(242,212,119,0.22),transparent 50%),var(--bg-elev-2);
+  }
+  .glass-stage.has-video .fallback{display:none;}
+  .gw{position:absolute;padding:14px 18px;animation:gwFloat 7s ease-in-out infinite;}
+  .gw .k{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-bright);font-weight:700;}
+  .gw .v{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;line-height:1.1;margin-top:2px;}
+  .gw .s{font-size:12px;color:rgba(246,242,233,0.85);margin-top:2px;}
+  .gw-1{top:18px;left:18px;}
+  .gw-2{top:18px;right:18px;animation-delay:-2.3s;}
+  .gw-3{bottom:18px;left:18px;right:18px;display:flex;align-items:center;gap:14px;animation-delay:-4.6s;}
+  .gw-3 .play{
+    flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);
+    background:rgba(212,175,55,0.18);color:var(--gold-bright);cursor:pointer;font-size:15px;
+  }
+  .gw-3 .play:hover{background:var(--gold);color:#151107;}
+  .gw-3 .play:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px;}
+  .gw-3 p{margin:0;font-size:14px;line-height:1.5;flex:1;}
+  .gw .live{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ade80;margin-right:6px;animation:gwPulse 1.8s infinite;}
+  @keyframes gwFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes gwPulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.6)}100%{box-shadow:0 0 0 10px rgba(74,222,128,0)}}
+  .review-card{
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+  @media (max-width:640px){
+    .glass-stage{aspect-ratio:4/5;}
+    .gw-2{display:none;}
+    .gw .v{font-size:24px;}
+    .gw-3 p{font-size:12px;}
+  }
 </style>
 </head>
 <body>
@@ -600,6 +648,35 @@
   </div>
 </section>
 
+<section class="celebrate" id="celebrate">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="text" data-en="Moments That Matter" data-fr="Des Moments Qui Comptent">Moments That Matter</span>
+      <h2 data-i18n="text" data-en="Celebrate Every Milestone" data-fr="Célébrez Chaque Étape">Celebrate Every Milestone</h2>
+    </div>
+    <div class="glass-stage" id="glassStage">
+      <div class="fallback" aria-hidden="true"></div>
+      <video id="celebVideo" muted loop playsinline preload="metadata" aria-label="Celebration highlight">
+        <source src="assets/celebration.mp4" type="video/mp4">
+      </video>
+      <div class="gw gw-1 glass">
+        <div class="k" data-i18n="text" data-en="Awards Delivered" data-fr="Trophées Livrés">Awards Delivered</div>
+        <div class="v" data-count="500">0</div>
+        <div class="s" data-i18n="text" data-en="across Africa" data-fr="à travers l'Afrique">across Africa</div>
+      </div>
+      <div class="gw gw-2 glass">
+        <div class="k"><span class="live"></span><span data-i18n="text" data-en="Live" data-fr="En direct">Live</span></div>
+        <div class="v" id="gwClock">--:--</div>
+        <div class="s" data-i18n="text" data-en="Orders open" data-fr="Commandes ouvertes">Orders open</div>
+      </div>
+      <div class="gw gw-3 glass">
+        <button class="play" id="celebPlay" type="button" aria-label="Play or pause video">❚❚</button>
+        <p data-i18n="text" data-en="Your funded milestone deserves a moment worth remembering." data-fr="Votre étape de financement mérite un moment inoubliable.">Your funded milestone deserves a moment worth remembering.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <div class="section-head">
@@ -695,6 +772,43 @@
   let savedLang = 'en';
   try{ savedLang = localStorage.getItem('afa-lang') || 'en'; }catch(e){}
   setLang(savedLang);
+
+  // Glass widgets: video, counter, clock
+  (function(){
+    const stage=document.getElementById('glassStage');
+    const vid=document.getElementById('celebVideo');
+    const btn=document.getElementById('celebPlay');
+    const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    vid.addEventListener('loadeddata',()=>{
+      stage.classList.add('has-video');
+      if(!reduce){ vid.play().catch(()=>{}); }
+    });
+    const sync=()=>{ btn.textContent=vid.paused?'▶':'❚❚'; };
+    vid.addEventListener('play',sync); vid.addEventListener('pause',sync);
+    btn.addEventListener('click',()=>{ vid.paused?vid.play().catch(()=>{}):vid.pause(); });
+    sync();
+
+    const cnt=stage.querySelector('[data-count]');
+    const target=+cnt.dataset.count;
+    const fmt=n=>n.toLocaleString('en-US')+'+';
+    if(reduce){ cnt.textContent=fmt(target); }
+    else{
+      new IntersectionObserver((e,o)=>{
+        if(!e[0].isIntersecting) return; o.disconnect();
+        const t0=performance.now();
+        const step=t=>{
+          const p=Math.min((t-t0)/1400,1);
+          cnt.textContent=fmt(Math.round(target*(1-Math.pow(1-p,3))));
+          if(p<1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      },{threshold:0.4}).observe(stage);
+    }
+
+    const clock=document.getElementById('gwClock');
+    const tick=()=>{ clock.textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); };
+    tick(); setInterval(tick,30000);
+  })();
 </script>
 
 </body>
